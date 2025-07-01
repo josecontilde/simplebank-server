@@ -1,0 +1,23 @@
+version: "2"
+
+sql:
+  - schema: "./db/migrations/"
+    queries: "./db/query/"
+    engine: "postgresql"
+    gen:
+      go:
+        out: "./db/sqlc"
+        package: "sqlc"
+        emit_json_tags: true
+        emit_interface: false
+        emit_exact_table_names: false
+
+overrides:
+  go:
+    rename:
+      id: "ID"
+    overrides:
+      - db_type: "pg_catalog.numeric"
+        go_type: "github.com/shopspring/decimal.Decimal"
+      - db_type: "numeric"
+        go_type: "github.com/shopspring/decimal.Decimal"
