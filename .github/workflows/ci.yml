@@ -37,6 +37,9 @@ jobs:
         with:
           go-version: "1.24"
       
+      - name: Install Atlas CLI
+        run: curl -sSf https://atlasgo.sh | sh
+      
       - name: Run migrations
         run: make migrate-apply
       
